@@ -24,8 +24,8 @@
             </div>
         </div>
     </header>
-    <div class="form-content">
-        <form class="form" action="#" onsubmit="save(event);return false">
+    <div id="formId" class="form-content">
+        <form class="form" action="#" onreset="resetForm()" onsubmit="save()">
             
             <!-- Ability to create a Form Header and the Input Text Element for Name -->
             <div class="form-head">Employee Payroll form</div>
@@ -87,13 +87,13 @@
                 <label class="label text" for="salary">Choose your salary: </label>
                 <input class="input" type="range" name="salary" id="salary" min="300000" max="500000" 
                 step="100" value="400000">
-                <output class="salary—output text" for="salary">400000</output>
+                <output class="salary—output text" for="salary-output">400000</output>
             </div>
 
             <!-- Ability to specify the start date with Day, Month and Year as Select Input Item -->
             <div class="row-content">
                 <label class="label text" for="startDate">Start Date</label>
-                <div>
+                <div id="date">
                     <select id="day" name="Day">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -151,6 +151,7 @@
                         <option value="2016">2016</option>
                     </select>
                 </div>
+                <error-output class="date-error" for="startDate"></error-output>
             </div>
             <!-- Ability to add Notes as well as cancel, reset and submit button so as to do some action on form entry -->
             <div class="row-content">
@@ -168,5 +169,6 @@
     </div>
       
     <script src="../js/EmployeePayroll.js"></script>
+    <script src="../js/PayrollForm.js"></script>
 </body>
 </html>
