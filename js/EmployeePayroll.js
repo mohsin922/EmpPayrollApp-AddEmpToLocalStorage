@@ -2,7 +2,7 @@
          - New Attributes added are Department, Gender, Employee Notes, Profile Pic, etc
          - Note – Getters and Setters are used for all properties and Constructor is made default 
 */
-class EmployeePayroll {
+class EmployeePayrollData {
 
     // getter and setter method
     get id() { return this._id; }
@@ -45,11 +45,6 @@ class EmployeePayroll {
 
     get startDate() { return this._startDate; }
     set startDate(startDate) {
-        let now = new Date();
-        if (startDate > now) throw 'Start Date is a Future Date!';
-        var diff = Math.abs(now.getTime() - startDate.getTime());
-        if (diff / (1000 * 60 * 60 * 24) > 30) 
-          throw 'Start Date is beyond 30 Days!';
         this._startDate = startDate; 
     }
     // toString() method
