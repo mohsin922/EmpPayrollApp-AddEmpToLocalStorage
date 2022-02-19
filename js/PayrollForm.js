@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             return;
         }
         try {
-            (new EmployeePayroll()).name = name.value;
+            (new EmployeePayrollData()).name = name.value;
             textError.textContent = "";
         } catch (e) {
             textError.textContent = e;
@@ -42,7 +42,7 @@ const save = () => {
 }
 
 const createEmployeePayroll = () => {
-    let employeePayrollData = new EmployeePayroll();
+    let employeePayrollData = new EmployeePayrollData();
     try {
         employeePayrollData.name = getInputValueById('#name');
     }
@@ -56,8 +56,6 @@ const createEmployeePayroll = () => {
     employeePayrollData.department = getSelectedValues('[name=department]');
     employeePayrollData.salary = getInputValueById('#salary');
     employeePayrollData.note = getInputValueById('#notes');
-    let date = getInputValueById('#day') + " " + getInputValueById('#month') + " " + getInputValueById('#year');
-    employeePayrollData.date = Date.parse(date);
     alert(employeePayrollData.toString());
     return employeePayrollData;
 }
@@ -109,3 +107,28 @@ const getInputElementValue = (id) => {
      alert(employeePayrollList.toString());
      localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList))
  }
+
+/* UC5:- Ability to reset the form on clicking reset  */
+const resetForm = () => {
+    setValue('#name','');
+    unsetSelectedValues('[name=profile]');
+    unsetSelectedValues('[name=gender]');
+    unsetSelectedValues('[name=department]');
+    setValue('#salary', '');
+    setValue('#notes', '');
+    setValue('#day', '1');
+    setValue('#month', 'January');
+    setValue('#year', '2022');
+}
+const unsetSelectedValues = (propertyValue) => {
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item => { item.checked = false; });
+}
+const setTextValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.textContent = value;
+}
+const setValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.value = value;
+}
