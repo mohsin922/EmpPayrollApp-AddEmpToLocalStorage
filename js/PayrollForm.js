@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             return;
         }
         try {
-            (new EmployeePayrollData()).name = name.value;
+            (new EmployeePayroll()).name = name.value;
             textError.textContent = "";
         } catch (e) {
             textError.textContent = e;
@@ -42,7 +42,7 @@ const save = () => {
 }
 
 const createEmployeePayroll = () => {
-    let employeePayrollData = new EmployeePayrollData();
+    let employeePayrollData = new EmployeePayroll();
     try {
         employeePayrollData.name = getInputValueById('#name');
     }
@@ -56,9 +56,8 @@ const createEmployeePayroll = () => {
     employeePayrollData.department = getSelectedValues('[name=department]');
     employeePayrollData.salary = getInputValueById('#salary');
     employeePayrollData.note = getInputValueById('#notes');
-    let date = getInputValueById('#day')+" " + getInputValueById('#month')+ " " +
-                getInputValueById('#year');
-    employeePayrollData.startDate = new Date(Date.parse(date));
+    let date = getInputValueById('#day') + " " + getInputValueById('#month') + " " + getInputValueById('#year');
+    employeePayrollData.date = Date.parse(date);
     alert(employeePayrollData.toString());
     return employeePayrollData;
 }
@@ -91,3 +90,22 @@ const getInputElementValue = (id) => {
     let value = document.getElementById(id).value;
     return value;
 }
+
+/* UC4:- Ability to save the Employee Payroll Object to Local Storage.
+    - Understand the difference between Local Storage, Session Storage and older feature of storing in cookies. 
+*/
+ function createAndUpdateStorage(employeePayrollData) 
+ {
+     let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+
+     if (employeePayrollList != undefined) 
+     {
+         employeePayrollList.push(employeePayrollData);
+     }
+     else 
+     {
+         employeePayrollList = [employeePayrollData];
+     }
+     alert(employeePayrollList.toString());
+     localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList))
+ }
